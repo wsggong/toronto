@@ -17,7 +17,7 @@
 Plots the cross-validation curve, as a function of the lambda values used.
 }
 \details{
-A plot is produced, and nothing is returned
+A plot is produced, and nothing is returned. Red line indicates the selected lambda with minimal tested error. Blue line is for lambda with one standard deviation above, which is \code{lambda.1se} of the fitted model.
 }
 \examples{
 x <- matrix(rnorm(1000), nrow = 50, ncol = 20)

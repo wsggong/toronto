@@ -14,12 +14,12 @@ l4acp(x, y, q, s, trim=0.1)
 
 \item{q}{A threshold covariate.}
 
-\item{s}{The values of lambda used for lasso regression}
+\item{s}{The values of lambda(tuning parameter) used for lasso regression. To know what the objective function that is minimized for lasso regression, see the "Details" below. This is not given by default. To get an idea which value to use, check \code{cvl4acp}.}
 
 \item{trim}{The percentile for trimming the data of a threshold covariate (from above and below) to obtain the range for threshold parameter. By default, it is 0.1. And this results in finding a threshold parameter from 10-90 percentile range of a threshold variable.}
 }
 \value{
-\item{lambda}{ The values of lambda corresponding to the each regression outcome below. It is automatically ordered from high to low values.}
+\item{lambda}{ The values of lambda used for regression. Each lambda has corresponding \code{tau.hat}, \code{coefficients}, \code{M.alpha}, \code{R2}, and \code{adj.R2}. Note that it is automatically ordered from high to low values before it runs, and on its result.}
 \item{tau.hat}{ The estimated threshold covariates.}
 \item{coefficients}{ The regression coefficients for covariates. If the covariates has n different variables, it leads to (2n+2) coefficients.
 The first (n+1) coefficients can be interpreted as the coefficients when a threshold covariate is below the threshold parameter. It includes an intercept at the head. That's why the number of coefficients is (n+1), not n.
@@ -27,10 +27,16 @@ And the next (n+1) variables are change of regression coefficients when a thresh
 \item{adj.R2}{ Adjusted R2 square.}
 \item{M.alpha}{ The number of nonzero coefficients from regression, whose maximum is (2n+2).}
 \item{grid.loop}{ Used for the threshold grid curve.}
-\item{matrix}{ A matrix that includes \code{lambda}, \code{tau.hat}, \code{coefficients}, \code{M.alpha}, \code{R2}, and \code{adj.R2}}
+\item{matrix}{ A matrix that includes \code{lambda}, \code{tau.hat}, \code{coefficients}, \code{M.alpha}, \code{R2}, and \code{adj.R2}. Each column represents a specific lambda value.}
 }
 \description{
 LASSO regression of a model with a change point due to a covariate threshold. It obtains regression coefficients for covariates, and a threshold parameter.
+}
+\details{
+The objective function that is minimized is \deqn{(1/n)*RSS + lambda * penalty},
+while the penalty is \deqn{\sum||X(j)||_2 * |\beta_{j}|_1}
+This is the exact objective function written in Sokbae Lee, Myung Hwan Seo, and Youngki Shin, (2016), which is a little different from that of \code{LARS} or \code{glmnet} packages.
+Remember that beta does not contain the estimated intercept.
 }
 \examples{
 # using 'gdp60' as an threshold variable

@@ -1,6 +1,6 @@
 Package: toronto
-Version: 0.0.1
-Date: 2018-08-01
+Version: 0.0.2
+Date: 2018-09-21
 Depends: R (>= 3.4.0)
 Title: The Lasso for High Dimensional Regression with a Possible Change Point
 Description: Run a LASSO regression for a high dimensional model with a possible change point due to a covariate threshold. It finds the lasso estimator of regression coefficients and the threshold parameter. The method and theoretical description under sparsity assumption is written in the paper linked to via the URL below.
@@ -13,5 +13,6 @@ ByteCompile: true
 Imports: 
     glmnet(>= 2.0-16),
     caret(>= 6.0-80)
+    Matrix
 URL: https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12108
 RoxygenNote: 6.1.0

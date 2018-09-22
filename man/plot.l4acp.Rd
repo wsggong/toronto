@@ -4,16 +4,16 @@
 \alias{plot.l4acp}
 \title{plot the threshold grid curve produced by l4acp}
 \usage{
-\method{plot}{l4acp}(x, s = min(x$lambda), type = "lasso", ...)
+\method{plot}{l4acp}(x, v = 1, type = "lasso", ...)
 }
 \arguments{
 \item{x}{fitted "l4acp" object}
 
-\item{s}{the specified lambda value for threshold grid curve. Note that when specific lambda values are putted, it does not come out with the result from that lambda values exactly. Rather it finds the nearest lambda value from the lambda sequence in the fitted "l4acp" object. By default it is the smallest one from the lambda sequence.}
+\item{v}{inex for a lambda value. Remember that you can only make a plot with one lambda value. By default it is 1, which is the largest among the lambda sequence used for \code{l4acp}. It is consistent to the column names of a matrix that comes out when you call the fitted model in console.}
 
 \item{type}{If the type is "lasso", it makes the plot by the value of a lasso objective function. Else if the type is "mse", it makes the plot by the value of a MSE.}
 
-\item{...}{other arguments that can be passedd to l4acp}
+\item{...}{other arguments that can be applied to l4acp}
 }
 \description{
 Plots the lasso objective function's value obtained from running regression by putting each value of threshold parameter's range in a model. It can also make plot not from lasso objective function but from ordinary MSE. Since \code{l4acp} can use multiple lambda values, it is required to specify a lambda value. Note that the plot has x-axis corresponding to threshold grid, and y-axis corresponding to the lasso objective function.

@@ -14,9 +14,9 @@ cvl4acp(x, y, q, s=NULL, trim=0.1, nfolds=10)
 
 \item{q}{A threshold covariate as in \code{l4acp}.}
 
-\item{s}{Input for the sequence of lambdas to be tested. By default, it generates 3 lambda sequences of length 100, following the method used in \code{glmnet} 3 times from the top, middle, and bottom values of threshold parameter's range.
-But in usual case, the three lambda sequences are identical. So after removing duplication, 100 values remain.
-And at the last time it augments the sequence by adding a sequence of length 100 from the lowest value of the existing lambda sequence to 0, with an equal difference between two adjacent values.}
+\item{s}{Input for the sequence of lambdas to be tested. By default, when it is not specificed, it generates 3 lambda sequences of length 100, following the method used in \code{glmnet} 3 times from the top, middle, and bottom values of threshold parameter's range.
+But it is possible that the three lambda sequences are identical. Then after removing duplication, 100 values remain.
+It is recommended to run without lambda sequence at first time with small nfolds. Important! Remember to check whether it is credible by using plot. See \code{plot.cvl4acp}. You can get an idea which lambda sequence to put based on the default one's range.}
 
 \item{trim}{The percentile for trimming to obtain the range of a threshold parameter as in \code{l4acp}.}
 
@@ -29,7 +29,6 @@ And at the last time it augments the sequence by adding a sequence of length 100
 \item{lambda.seq}{ The lambda sequence it runned cross validation.}
 \item{lamda.min}{ The lambda value that minimizes the cvm.}
 \item{lambda.1se}{ The maximal lambda among the values that are smaller than \code{lambda.min}+1*\code{cvsd}(it depends on lambda)}
-\item{lambda.sample}{ The lambda values from \code{lambda.min} to \code{lambda.1se}.}
 }
 \description{
 Does k-folds cross-validation for l4acp, produces a plot, and returns a value for lambda

@@ -7,8 +7,7 @@
 #' @param logscale If it is TRUE, the x-axis is shown by log scale. By default it is FALSE
 #' @param ... Other argumnets that can be passed to cvl4acp
 #'
-#' @details A plot is produced, and nothing is returned
-#'
+#' @details A plot is produced, and nothing is returned. Red line indicates the selected lambda with minimal tested error. Blue line is for lambda with one standard deviation above, which is \code{lambda.1se} of the fitted model.
 #'
 #' @examples
 #' x <- matrix(rnorm(1000), nrow = 50, ncol = 20)
@@ -34,5 +33,3 @@ plot.cvl4acp <- function(x, logscale=FALSE, ...) {
     graphics::abline(v = log(x$lambda.1se), col = "blue")
   }
 }
-
-

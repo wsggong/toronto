@@ -1,12 +1,11 @@
-
 #' plot the threshold grid curve produced by l4acp
 #'
 #' Plots the lasso objective function's value obtained from running regression by putting each value of threshold parameter's range in a model. It can also make plot not from lasso objective function but from ordinary MSE. Since \code{l4acp} can use multiple lambda values, it is required to specify a lambda value. Note that the plot has x-axis corresponding to threshold grid, and y-axis corresponding to the lasso objective function.
 #'
 #' @param x fitted "l4acp" object
-#' @param s the specified lambda value for threshold grid curve. Note that when specific lambda values are putted, it does not come out with the result from that lambda values exactly. Rather it finds the nearest lambda value from the lambda sequence in the fitted "l4acp" object. By default it is the smallest one from the lambda sequence.
+#' @param v inex for a lambda value. Remember that you can only make a plot with one lambda value. By default it is 1, which is the largest among the lambda sequence used for \code{l4acp}. It is consistent to the column names of a matrix that comes out when you call the fitted model in console.
 #' @param type If the type is "lasso", it makes the plot by the value of a lasso objective function. Else if the type is "mse", it makes the plot by the value of a MSE.
-#' @param ... other arguments that can be passedd to l4acp
+#' @param ... other arguments that can be applied to l4acp
 #'
 #' @details  A plot is produced, and nothing is returned
 #'
@@ -22,32 +21,24 @@
 #' plot(fit, type="lasso")
 #' @export
 
-plot.l4acp <- function(x, s = min(x$lambda), type = "lasso", ...) {
+plot.l4acp <- function(x, v=1, type = "lasso", ...) {
 
-  num <- which.min(abs(x$lambda - s))
   dat <- x$grid.loop[[1]]
 
   if (type == "lasso") {
-    y <- x$grid.loop[[2]][, num]
+    y <- x$grid.loop[[2]][, v]
     graphics::par(new = FALSE)
     graphics::plot(dat, y, type = "o", pch = 19, xlab = "threshold grid", ylab = "Lasso objective funct")
+    graphics::title(paste("lambda=",x$lambda[v],sep=""))
   }
 
   if (type == "mse") {
-    y <- x$grid.loop[[3]][, num]
+    y <- x$grid.loop[[3]][, v]
     graphics::par(new = FALSE)
     graphics::plot(dat, y, type = "o", pch = 19, xlab = "threshold grid", ylab = "MSE")
+    graphics::title(paste("lambda=",x$lambda[v],sep=""))
   }
-
-  if (min(abs(x$lambda - s)) >= 1e-07) {
-    cat("NOTE: input for lambda should be the one from the model's lambda sequence")
-    cat("\n")
-    cat("the result is from when lambda =", x$lambda[num])
-  }
-
 }
-
-
 
 coef.l4acp <- function(x, ...) {
   print(x$coefficients)
