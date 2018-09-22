@@ -51,7 +51,7 @@ cvl4acpEst <- function(x, y, q, s = NULL, trim = 0.1, nfolds = 10) {
     for (i in 1:3) {
       ind <- (q < q_seq[i])
       x.reg <- cbind(x, 1 * ind, x * ind)  # preparing regressor (x, x(tau))
-      s <- append(s, glmnet::glmnet(x.reg, y)$lambda / 2 )
+      s <- append(s, glmnet::glmnet(x.reg, y)$lambda * 2 )
       s <- sort(s, decreasing = TRUE)
       s <- s[!duplicated(s)]
     }
