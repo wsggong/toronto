@@ -142,6 +142,8 @@ l4acpEst <- function(x, y, q, s, trim = 0.1) {
 #' \item{matrix}{ A matrix that includes \code{lambda}, \code{tau.hat}, \code{coefficients}, \code{M.alpha}, \code{R2}, and \code{adj.R2}. Each column represents a specific lambda value.}
 #'
 #' @details
+#' The regression model by this function is \deqn{Y = \alpha + X*\beta + X*\delta*I{q<\tau} + u}.
+#' The estimated \code{coefficients} by \code{l4acp} contain the estimators for alpha(intercept), beta(coefficients before a change point), and delta(coefficients change after a change point). \code{tau.hat} is the estimator for tau in the model above.
 #' The objective function that is minimized is \deqn{(1/n)*RSS + lambda * penalty},
 #' while the penalty is \deqn{\sum||X(j)||_2 * |\beta_{j}|_1}.
 #' This is the exact objective function written in Sokbae Lee, Myung Hwan Seo, and Youngki Shin, (2016), which is a little different from that of \code{LARS} or \code{glmnet} packages.

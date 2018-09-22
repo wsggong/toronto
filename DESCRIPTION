@@ -10,7 +10,8 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-Imports: 
+Imports:
+    Matrix(>= 1.0-6),
     glmnet(>= 2.0-16),
     caret(>= 6.0-80)
 URL: https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12108
