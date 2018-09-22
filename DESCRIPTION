@@ -13,6 +13,6 @@ ByteCompile: true
 Imports: 
     glmnet(>= 2.0-16),
     caret(>= 6.0-80)
-    Matrix
+    Matrix(>=1.2-14)
 URL: https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/rssb.12108
 RoxygenNote: 6.1.0
